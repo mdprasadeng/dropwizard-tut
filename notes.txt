@@ -43,6 +43,10 @@ Step 5:
 
     imp of throwing exceptions
 
+Step 6:
+    Hystrix integration
+    *why and how
+    *dependency management, async execution, monitoring, short circuiting
 
 
 
