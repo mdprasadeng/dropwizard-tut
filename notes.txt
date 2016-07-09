@@ -53,6 +53,40 @@ Step 7:
     *why DI, testing, Single Responsibility & seperation of concerns
     *excluding guice assist to DI the hystrix Commands
 
+Dropwizard's lifecycle
+    bootstraps and calls initialize
+        during which you can add bundles, override objectmapper, add commands
+    Parses cli and config and handles over to corresponding command
+    Server command - calls the run in Application during which we can resources, filters, healthchecks, managed etc
+
+
+Bundles
+   a parallel lifecycle to Dropwizard's Application. Allows to move similar components into a bundle.
+    Essentially a way to segregate the code in Application
+    *assests bundle allows exposing all files like a apache servers www dir
+    *migrations bunlde adds needed commands for migrations
+
+Commands
+    Allows dropwizard to be used a cli tool
+    *server command is the one that provides the http framework
+    *db commands allow db migrations
+    *we can have a command to download config from conman or config service
+
+HealthCheck:
+    Helps in monitoring the health of different dependencies of the system
+    *used in bring a box out of rotation in flipkart
+    *adding hibernate bundle adds a db healthcheck
+
+
+Tasks
+    enables running some maintance tasks
+    *can be used to manager things like clear/warm a inmemory cache
+    *can be used to increase of decrease the thread/memory pool for something
+    *dropwizard 9 and above provide a task to change log level
+
+Managed
+    attach to lifecycle of dropwizard
+    *start and stop to manage i.e start and stop thread pools, connection pools
 
 
 
