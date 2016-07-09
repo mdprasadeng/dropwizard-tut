@@ -24,3 +24,14 @@ Step 2:
     *Jackson deserialization
     *NotNull sample
     *use lombok
+
+
+Step 3:
+    Hibernate integration
+    *dbmigrate, how and why?
+    *Dropwizard commands server,db
+
+Step 4:
+    UserDAO
+    *querying the database
+

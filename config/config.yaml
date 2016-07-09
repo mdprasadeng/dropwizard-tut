@@ -1,5 +1,13 @@
 name: dropwizard-tut
 
+dataSource:
+  driverClass: com.mysql.jdbc.Driver
+  user: root
+  password:
+  url: jdbc:mysql://localhost/dropwizard-tut
+
+
+
 server:
   applicationConnectors:
   - type: http
