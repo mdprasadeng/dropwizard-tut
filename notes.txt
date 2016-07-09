@@ -1,9 +1,9 @@
 Describe the problem statement mentioned in problem.txt
 
-Step 1:
+Step 0:
     Get the sample main working for everyone with some sample arguments
 
-Step 2:
+Step 1:
     Simple dropwizard application with just server configuration
     *just another java program
     *lifecycle of a dropwizard application
