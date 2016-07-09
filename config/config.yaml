@@ -1,1 +1,16 @@
 name: dropwizard-tut
+
+server:
+  applicationConnectors:
+  - type: http
+    port: 9999
+  adminConnectors:
+  - type: http
+    port: 9991
+
+logging:
+  level: INFO
+  appenders:
+  - type: console
+    threshold: INFO
+
