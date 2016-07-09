@@ -1,0 +1,18 @@
+Describe the problem statement mentioned in problem.txt
+
+Step 1:
+    Get the sample main working for everyone with some sample arguments
+
+Step 2:
+    Simple dropwizard application with just server configuration
+    *just another java program
+    *lifecycle of a dropwizard application
+    *dropwizard as integration of different libraries with unified config (in most cases)
+
+Intro to important libraries
+    jetty for http
+    jersey (jax-rs) for rest
+    jackson for json
+    logback (slf4j) for logging
+    etc
+

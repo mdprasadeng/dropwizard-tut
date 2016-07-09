@@ -1,0 +1,12 @@
+Build a dropwizard service to manager Users.
+User is made up of
+    email,
+    phone number (unique)
+    meta data of phone number - available from a third party
+        state
+        network provider
+
+Build
+    API to create a User
+    API to fetch a User's details given phone number
+
