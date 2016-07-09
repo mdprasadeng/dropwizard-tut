@@ -1,23 +1,15 @@
 package com.mdprasadeng.dropwizard;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.mdprasadeng.app.service.PhoneNetworkClientAdapter;
-import com.mdprasadeng.app.service.UserService;
-import com.mdprasadeng.hibernate.UserEntityDAO;
 import com.mdprasadeng.hibernate.entities.UserEntity;
 import com.mdprasadeng.jersey.HelloResource;
 import com.mdprasadeng.jersey.UserResource;
-import com.mdprasadeng.phonenetworkclient.PhoneNetworkClient;
-import com.mdprasadeng.phonenetworkclient.PhoneNetworkClientFactory;
-
-import org.glassfish.jersey.filter.LoggingFilter;
-
-import java.util.logging.Logger;
-
-import javax.ws.rs.client.Client;
+import com.mdprasadeng.phonenetworkclient.PhoneNetworkClientModule;
 
 import io.dropwizard.Application;
-import io.dropwizard.client.JerseyClientBuilder;
 import io.dropwizard.db.PooledDataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.migrations.MigrationsBundle;
@@ -67,20 +59,13 @@ public class ManagerApplication extends Application<ManagerConfiguration> {
 
     environment.getObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);
 
-    Client client = new JerseyClientBuilder(environment)
-        .using(configuration.getJerseyClient())
-        .build("client");
-    client.register(new LoggingFilter(Logger.getLogger("ClientLogger"), true));
+    Injector injector = Guice.createInjector(
+      new ManagerModule(configuration, environment, hibernateBundle.getSessionFactory()),
+      new PhoneNetworkClientModule()
+    );
 
-
-    PhoneNetworkClient
-        pnClient = PhoneNetworkClientFactory.create(client, configuration.getPnConfig());
-    UserService userService = new UserService(new UserEntityDAO(hibernateBundle.getSessionFactory()),
-                                              new PhoneNetworkClientAdapter(pnClient));
-
-
-    environment.jersey().register(new HelloResource(configuration));
-    environment.jersey().register(new UserResource(userService));
+    environment.jersey().register(injector.getInstance(HelloResource.class));
+    environment.jersey().register(injector.getInstance(UserResource.class));
 
   }
 }

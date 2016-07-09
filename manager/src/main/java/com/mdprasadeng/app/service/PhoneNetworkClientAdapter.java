@@ -1,5 +1,7 @@
 package com.mdprasadeng.app.service;
 
+import com.google.inject.Inject;
+
 import com.mdprasadeng.app.models.User;
 import com.mdprasadeng.phonenetworkclient.PhoneNetworkClient;
 import com.mdprasadeng.phonenetworkclient.models.PhoneNetwork;
@@ -10,6 +12,7 @@ public class PhoneNetworkClientAdapter {
 
   private final PhoneNetworkClient pnClient;
 
+  @Inject
   public PhoneNetworkClientAdapter(PhoneNetworkClient pnClient) {
     this.pnClient = pnClient;
   }

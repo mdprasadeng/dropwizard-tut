@@ -1,5 +1,7 @@
 package com.mdprasadeng.hibernate;
 
+import com.google.inject.Inject;
+
 import com.mdprasadeng.hibernate.entities.UserEntity;
 
 import org.hibernate.Query;
@@ -12,6 +14,7 @@ import io.dropwizard.hibernate.AbstractDAO;
 
 public class UserEntityDAO extends AbstractDAO<UserEntity> {
 
+  @Inject
   public UserEntityDAO(SessionFactory sessionFactory) {
     super(sessionFactory);
   }

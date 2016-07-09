@@ -1,5 +1,7 @@
 package com.mdprasadeng.jersey;
 
+import com.google.inject.Inject;
+
 import com.mdprasadeng.app.models.User;
 import com.mdprasadeng.app.service.UserService;
 
@@ -24,6 +26,7 @@ public class UserResource {
 
   private final UserService userService;
 
+  @Inject
   public UserResource(UserService userService) {
     this.userService = userService;
   }

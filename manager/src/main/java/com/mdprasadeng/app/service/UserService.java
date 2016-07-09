@@ -1,5 +1,7 @@
 package com.mdprasadeng.app.service;
 
+import com.google.inject.Inject;
+
 import com.mdprasadeng.app.models.User;
 import com.mdprasadeng.hibernate.UserEntityDAO;
 import com.mdprasadeng.hibernate.entities.UserEntity;
@@ -13,6 +15,7 @@ public class UserService {
   private final UserEntityDAO userEntityDAO;
   private final PhoneNetworkClientAdapter pnAdapter;
 
+  @Inject
   public UserService(UserEntityDAO userEntityDAO,
                      PhoneNetworkClientAdapter pnAdapter) {
     this.userEntityDAO = userEntityDAO;

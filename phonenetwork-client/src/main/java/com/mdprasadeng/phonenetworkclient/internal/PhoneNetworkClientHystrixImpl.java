@@ -1,5 +1,7 @@
 package com.mdprasadeng.phonenetworkclient.internal;
 
+import com.google.inject.Inject;
+
 import com.mdprasadeng.phonenetworkclient.PhoneNetworkClient;
 import com.mdprasadeng.phonenetworkclient.PhoneNetworkClientConfiguration;
 import com.mdprasadeng.phonenetworkclient.models.PhoneNetwork;
@@ -15,6 +17,7 @@ public class PhoneNetworkClientHystrixImpl implements PhoneNetworkClient {
   private final Client client;
   private final PhoneNetworkClientConfiguration configuration;
 
+  @Inject
   public PhoneNetworkClientHystrixImpl(Client client,
                                        PhoneNetworkClientConfiguration configuration) {
     this.client = client;

@@ -1,5 +1,7 @@
 package com.mdprasadeng.jersey;
 
+import com.google.inject.Inject;
+
 import com.mdprasadeng.dropwizard.ManagerConfiguration;
 
 import javax.ws.rs.DefaultValue;
@@ -12,6 +14,7 @@ public class HelloResource {
 
   private final ManagerConfiguration managerConfiguration;
 
+  @Inject
   public HelloResource(ManagerConfiguration managerConfiguration) {
     this.managerConfiguration = managerConfiguration;
   }
