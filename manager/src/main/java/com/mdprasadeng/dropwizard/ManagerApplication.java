@@ -1,7 +1,9 @@
 package com.mdprasadeng.dropwizard;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.mdprasadeng.app.models.User;
+import com.mdprasadeng.app.service.UserService;
+import com.mdprasadeng.hibernate.UserEntityDAO;
+import com.mdprasadeng.hibernate.entities.UserEntity;
 import com.mdprasadeng.jersey.HelloResource;
 import com.mdprasadeng.jersey.UserResource;
 
@@ -13,6 +15,8 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 
 public class ManagerApplication extends Application<ManagerConfiguration> {
+
+  private HibernateBundle<ManagerConfiguration> hibernateBundle;
 
   public static void main(String[] args) throws Exception {
     System.out.println("Hello from a Java Program");
@@ -26,9 +30,8 @@ public class ManagerApplication extends Application<ManagerConfiguration> {
   public void initialize(Bootstrap<ManagerConfiguration> bootstrap) {
     super.initialize(bootstrap);
 
-    HibernateBundle<ManagerConfiguration>
-        hibernateBundle =
-        new HibernateBundle<ManagerConfiguration>(User.class) {
+    hibernateBundle =
+        new HibernateBundle<ManagerConfiguration>(UserEntity.class) {
           @Override
           public PooledDataSourceFactory getDataSourceFactory(ManagerConfiguration configuration) {
             return configuration.getDataSource();
@@ -54,8 +57,10 @@ public class ManagerApplication extends Application<ManagerConfiguration> {
 
     environment.getObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);
 
+    UserService userService = new UserService(new UserEntityDAO(hibernateBundle.getSessionFactory()));
+
     environment.jersey().register(new HelloResource(configuration));
-    environment.jersey().register(new UserResource());
+    environment.jersey().register(new UserResource(userService));
 
   }
 }

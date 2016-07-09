@@ -18,6 +18,8 @@ server:
 
 logging:
   level: INFO
+  loggers:
+   org.hibernate: WARN
   appenders:
   - type: console
     threshold: INFO
