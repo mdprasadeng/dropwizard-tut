@@ -75,3 +75,7 @@ gradle-app.setting
 !gradle-wrapper.jar
 
 # Created by .ignore support plugin (hsz.mobi)
+
+gradle/
+gradlew
+gradlew.bat
