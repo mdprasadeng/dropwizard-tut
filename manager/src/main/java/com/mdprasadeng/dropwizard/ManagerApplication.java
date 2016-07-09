@@ -1,6 +1,8 @@
 package com.mdprasadeng.dropwizard;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.mdprasadeng.jersey.HelloResource;
+import com.mdprasadeng.jersey.UserResource;
 
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
@@ -27,7 +29,10 @@ public class ManagerApplication extends Application<ManagerConfiguration> {
     environment.jersey(); // gives access to Jersey
     environment.getObjectMapper(); //gives access to Jackson
 
+    environment.getObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);
+
     environment.jersey().register(new HelloResource(configuration));
+    environment.jersey().register(new UserResource());
 
   }
 }

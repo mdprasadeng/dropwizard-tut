@@ -18,6 +18,9 @@ Intro to important libraries
     logback (slf4j) for logging
     etc
 
-Step 1.5:
-    some config for jetty, logback
 
+Step 2:
+    User Resource
+    *Jackson deserialization
+    *NotNull sample
+    *use lombok
