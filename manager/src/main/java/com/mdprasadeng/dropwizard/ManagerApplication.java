@@ -27,7 +27,6 @@ public class ManagerApplication extends Application<ManagerConfiguration> {
     environment.jersey(); // gives access to Jersey
     environment.getObjectMapper(); //gives access to Jackson
 
-
     environment.jersey().register(new HelloResource(configuration));
 
   }
