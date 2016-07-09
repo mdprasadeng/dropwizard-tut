@@ -8,12 +8,13 @@ repositories {
 }
 
 dependencies {
+
+    compile project(':phonenetwork-client')
+
     compile group: 'io.dropwizard', name: 'dropwizard-core', version: dropwizardVersion
     compile group: 'io.dropwizard', name: 'dropwizard-hibernate', version: dropwizardVersion
     compile group: 'io.dropwizard', name: 'dropwizard-migrations', version: dropwizardVersion
-
-
-    compile group: 'org.projectlombok', name: 'lombok', version: '1.16.8'
+    compile group: 'io.dropwizard', name: 'dropwizard-client', version: dropwizardVersion
 
     compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.3'
 

@@ -1,13 +1,23 @@
 package com.mdprasadeng.dropwizard;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.mdprasadeng.app.service.PhoneNetworkClientAdapter;
 import com.mdprasadeng.app.service.UserService;
 import com.mdprasadeng.hibernate.UserEntityDAO;
 import com.mdprasadeng.hibernate.entities.UserEntity;
 import com.mdprasadeng.jersey.HelloResource;
 import com.mdprasadeng.jersey.UserResource;
+import com.mdprasadeng.phonenetworkclient.PhoneNetworkClient;
+import com.mdprasadeng.phonenetworkclient.PhoneNetworkClientFactory;
+
+import org.glassfish.jersey.filter.LoggingFilter;
+
+import java.util.logging.Logger;
+
+import javax.ws.rs.client.Client;
 
 import io.dropwizard.Application;
+import io.dropwizard.client.JerseyClientBuilder;
 import io.dropwizard.db.PooledDataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.migrations.MigrationsBundle;
@@ -57,7 +67,17 @@ public class ManagerApplication extends Application<ManagerConfiguration> {
 
     environment.getObjectMapper().setSerializationInclusion(JsonInclude.Include.NON_NULL);
 
-    UserService userService = new UserService(new UserEntityDAO(hibernateBundle.getSessionFactory()));
+    Client client = new JerseyClientBuilder(environment)
+        .using(configuration.getJerseyClient())
+        .build("client");
+    client.register(new LoggingFilter(Logger.getLogger("ClientLogger"), true));
+
+
+    PhoneNetworkClient
+        pnClient = PhoneNetworkClientFactory.create(client, configuration.getPnConfig());
+    UserService userService = new UserService(new UserEntityDAO(hibernateBundle.getSessionFactory()),
+                                              new PhoneNetworkClientAdapter(pnClient));
+
 
     environment.jersey().register(new HelloResource(configuration));
     environment.jersey().register(new UserResource(userService));

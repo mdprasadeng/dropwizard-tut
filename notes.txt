@@ -35,3 +35,14 @@ Step 4:
     UserDAO
     *querying the database
 
+Step 5:
+    Jersey Client
+    *client usage
+    *seperate module
+    *adapter pattern
+
+    imp of throwing exceptions
+
+
+
+
