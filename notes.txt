@@ -4,10 +4,12 @@ Step 0:
     Get the sample main working for everyone with some sample arguments
 
 Step 1:
-    Simple dropwizard application with just server configuration
+    Simple dropwizard application with Hello API
     *just another java program
     *lifecycle of a dropwizard application
     *dropwizard as integration of different libraries with unified config (in most cases)
+    */hello?name=durga
+    *:admin port
 
 Intro to important libraries
     jetty for http
@@ -15,4 +17,7 @@ Intro to important libraries
     jackson for json
     logback (slf4j) for logging
     etc
+
+Step 1.5:
+    some config for jetty, logback
 
