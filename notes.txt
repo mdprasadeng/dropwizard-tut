@@ -10,6 +10,13 @@ Step 1:
     *dropwizard as integration of different libraries with unified config (in most cases)
     */hello?name=durga
     *:admin port
+<<<<<<< HEAD
+=======
+    	show metrics, healthcheck
+
+	#Exercise trace the path from main till run    	
+
+>>>>>>> master
 
 Intro to important libraries
     jetty for http
@@ -18,22 +25,46 @@ Intro to important libraries
     logback (slf4j) for logging
     etc
 
+<<<<<<< HEAD
+=======
+Dropwizard's lifecycle
+    bootstraps and calls initialize
+        during which you can add bundles, override objectmapper, add commands
+    Parses cli and config and handles over to corresponding command
+    Server command - calls the run in Application during which we can resources, filters, healthchecks, managed etc
+
+>>>>>>> master
 
 Step 2:
     User Resource
     *Jackson deserialization
     *NotNull sample
     *use lombok
+<<<<<<< HEAD
+=======
+    ?touch on thread contention
+    #Exercise @JsonSnakeCase is a dropwizard annotation why does that work
+>>>>>>> master
 
 
 Step 3:
     Hibernate integration
     *dbmigrate, how and why?
     *Dropwizard commands server,db
+<<<<<<< HEAD
+=======
+    #Exercise HealthCheck warning is gone? why
+>>>>>>> master
 
 Step 4:
     UserDAO
     *querying the database
+<<<<<<< HEAD
+=======
+    *transaction / UnitOfWork
+
+
+>>>>>>> master
 
 Step 5:
     Jersey Client
@@ -41,16 +72,28 @@ Step 5:
     *seperate module
     *adapter pattern
 
+<<<<<<< HEAD
+=======
+    #Exercise how does Client know json serialization/deserialization?	
+
+>>>>>>> master
     imp of throwing exceptions
 
 Step 6:
     Hystrix integration
     *why and how
     *dependency management, async execution, monitoring, short circuiting
+<<<<<<< HEAD
+=======
+    *executor pattern
+
+    #Exercise read up rx-java and tryout command::observe
+>>>>>>> master
 
 Step 7:
     Guice Integration
     *why DI, testing, Single Responsibility & seperation of concerns
+<<<<<<< HEAD
     *excluding guice assist to DI the hystrix Commands
 
 Dropwizard's lifecycle
@@ -58,6 +101,9 @@ Dropwizard's lifecycle
         during which you can add bundles, override objectmapper, add commands
     Parses cli and config and handles over to corresponding command
     Server command - calls the run in Application during which we can resources, filters, healthchecks, managed etc
+=======
+    #Exercise guice assist to DI the hystrix Commands
+>>>>>>> master
 
 
 Bundles
@@ -66,6 +112,11 @@ Bundles
     *assests bundle allows exposing all files like a apache servers www dir
     *migrations bunlde adds needed commands for migrations
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> master
 Commands
     Allows dropwizard to be used a cli tool
     *server command is the one that provides the http framework
@@ -88,5 +139,13 @@ Managed
     attach to lifecycle of dropwizard
     *start and stop to manage i.e start and stop thread pools, connection pools
 
+<<<<<<< HEAD
 
+=======
+HubSpot's dropwizard-guice
+	auto scans packages and addes resources, filter, commands, bundles, tasks, healthchecks etc
+
+One Click Dropwizard Solution
+	demo    	
+>>>>>>> master
 
