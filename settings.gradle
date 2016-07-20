@@ -2,3 +2,5 @@ rootProject.name = 'dropwizard-tut'
 
 include 'manager'
 
+include 'phonenetwork-client'
+
