@@ -5,3 +5,8 @@ In Intellij File->Open and select dropwizard-tut/build.gradle
 open terminal and run "./gradlew run"
 
 it should start dropwizard service running
+
+In Intellij
+    enable annotation processing Intellij->Preferences->Build->Compiler->Annotation Processing
+    install lombak plugin Intellij->Preferences->Plugins->browse repositories select lombok
+    in project strucutre select language to 8
