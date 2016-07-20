@@ -7,7 +7,12 @@ import com.mdprasadeng.hibernate.entities.UserEntity;
 import com.mdprasadeng.jersey.HelloResource;
 import com.mdprasadeng.jersey.UserResource;
 
+import org.glassfish.jersey.filter.LoggingFilter;
+
+import javax.ws.rs.client.Client;
+
 import io.dropwizard.Application;
+import io.dropwizard.client.JerseyClientBuilder;
 import io.dropwizard.db.PooledDataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.migrations.MigrationsBundle;
@@ -59,8 +64,13 @@ public class ManagerApplication extends Application<ManagerConfiguration> {
 
     UserService userService = new UserService(new UserEntityDAO(hibernateBundle.getSessionFactory()));
 
+    Client client = new JerseyClientBuilder(environment)
+        .build("client");
+
+    client.register(new LoggingFilter());
+
     environment.jersey().register(new HelloResource(configuration));
-    environment.jersey().register(new UserResource(userService));
+    environment.jersey().register(new UserResource(userService, client));
 
   }
 }

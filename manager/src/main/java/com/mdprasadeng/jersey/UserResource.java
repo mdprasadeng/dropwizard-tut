@@ -1,5 +1,6 @@
 package com.mdprasadeng.jersey;
 
+import com.mdprasadeng.PNetwork;
 import com.mdprasadeng.app.models.User;
 import com.mdprasadeng.app.service.UserService;
 
@@ -13,6 +14,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.client.Client;
 import javax.ws.rs.core.MediaType;
 
 import io.dropwizard.hibernate.UnitOfWork;
@@ -23,21 +25,38 @@ import io.dropwizard.hibernate.UnitOfWork;
 public class UserResource {
 
   private final UserService userService;
+  private final Client client;
 
-  public UserResource(UserService userService) {
+  public UserResource(UserService userService, Client client) {
     this.userService = userService;
+    this.client = client;
   }
 
   @GET
   @Path("/{phoneNumber}")
   @UnitOfWork
   public User getUser(@PathParam("phoneNumber") String phoneNumber) {
-    Optional<User> user = userService.fetchUser(phoneNumber);
-    if (user.isPresent()){
-      return user.get();
+    Optional<User> userOpt = userService.fetchUser(phoneNumber);
+
+    if (userOpt.isPresent()){
+
+      PNetwork pNetwork = client
+          .target("https://dropwizard-tutorial.firebaseio.com/phone/" + phoneNumber + ".json")
+          .request().get(PNetwork.class);
+
+      User user = userOpt.get();
+      user.setNetwork(new User.PhoneNetwork());
+
+      user.getNetwork().setState(pNetwork.getNetworkState());
+      user.getNetwork().setProvider(pNetwork.getNetworkProvider());
+
+      return user;
     } else {
       throw new NotFoundException("User with phoneNumber " + phoneNumber + " doesn't exist");
     }
+
+
+
 
 //    return user.orElseThrow(
 //        () -> new NotFoundException("User with phoneNumber " + phoneNumber + " doesn't exist"));
