@@ -1,0 +1,7 @@
+git clone https://github.com/mdprasadeng/dropwizard-tut.git
+
+In Intellij File->Open and select dropwizard-tut/build.gradle
+
+open terminal and run "./gradlew run"
+
+it should start dropwizard service running
